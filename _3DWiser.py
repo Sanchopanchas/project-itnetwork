@@ -26,7 +26,7 @@ class Company3DWiser:
         if self.list_of_printers:
             printer_id = input("Zadejte ID tiskárny k odebrání: ")
             for printer in self.list_of_printers:
-                if printer.printer_id == printer_id:
+                if printer.printer_id == printer_id:  # kontrola id_tiskárny
                     self.list_of_printers.remove(printer)
                     print("Tiskárna byla úspěšně odebrána ze systému")
                     break
@@ -35,7 +35,7 @@ class Company3DWiser:
         else:
             print("Žádné tiskárny nejsou v systému k dispozici.")
 
-    def show_available_printers(self):  # jak synchronizovat s kalendarem
+    def show_available_printers(self):  # kontrola dostupnosti tiskáren
         if self.list_of_printers:
             print("Dostupné tiskárny: ")
             for printer in self.list_of_printers:
@@ -43,9 +43,9 @@ class Company3DWiser:
         else:
             print("Žádné tiskárny nejsou v systému k dispozici.")
 
-    def book_printer(self, printer_id, date, purpose, description=""):
-        for printer in self.list_of_printers:  # list_of_printers mám definované u třídy Company
-            if printer.printer_id == printer_id:  # kontrola evidence tiskárny
+    def book_printer(self, printer_id, date, purpose, description=""):  # rezervování tiskárny
+        for printer in self.list_of_printers:
+            if printer.printer_id == printer_id:  # kontrola id_tiskárny
                 if Reservation.is_printer_available(printer, date):
                     # tiskárna je k dispozici, přidáme rezervaci
                     reservation = Reservation(date, purpose, description)
